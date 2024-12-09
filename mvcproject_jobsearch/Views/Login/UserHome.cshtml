@@ -1,0 +1,25 @@
+﻿@model mvcproject_jobsearch.Models.JobSearch
+@{
+    ViewBag.Title = "UserHome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UserHome</h2>
+
+<div>
+    @using (Html.BeginForm("searchjob_Pageload", "jobsearch", FormMethod.Get))
+    {
+        <table class="table">
+            <tr>
+                <td>
+                    @Html.ActionLink(" Job Details", "searchjob_pageload", "jobsearch")
+                </td>
+            </tr>
+      </table>
+    }
+    </div>
+<!-- Back to Home Page link -->
+<div>
+    @Html.ActionLink("Back to Home Page", "UserHome", "Login")
+</div>
+

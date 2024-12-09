@@ -1,0 +1,50 @@
+﻿@model mvcproject_jobsearch.Models.UserApplication
+@{
+    ViewBag.Title = "ApplyCV_Load";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Application Form</h2>
+<div>
+    @using (Html.BeginForm("Applycv_click", "UserApp", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div>
+            <label>Application Date</label>
+        </div>
+        <div>
+            @Html.TextBoxFor(m => m.appldate)
+            @Html.ValidationMessageFor(m => m.appldate)
+        </div>
+        <div>
+            <label>Resume</label>
+        </div>
+        <div>
+            @Html.TextBox("file", "", new { Type = "file" })
+        </div>
+        <input type="hidden" name="jid" value="@Request.QueryString["jid"]" />
+        <div>
+            <input type="submit" value="Apply" />
+            @if (Model != null && !string.IsNullOrEmpty(Model.msg))
+            {
+                <div class="alert alert-success">
+                    @Model.msg
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<div class="back-to-home">
+    @Html.ActionLink("Back to Home Page", "searchjob_pageload", "jobsearch")
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        @if (Model != null && Model.msg != null && Model.msg == "Applied Successfully")
+        {
+            <text>
+                alert("Applied Successfully");
+            </text>
+        }
+    </script>
+}
